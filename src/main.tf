@@ -7,12 +7,6 @@ terraform {
   }
 }
 
-provider "aws" {
-  AWS_ACCESS_KEY = "AKIAYMDWNSVCFVGWL35K"
-  AWS_SECRET_ACCESS_KEY = "wa3jf1OtO7PFKkUYZK0GJ314VFvWwBfSRYrMUnRz"
-  region = "us-east-1"
-}
-
 resource "aws_s3_bucket" "example" {
   bucket = "my-tf-test-bhghigygucket"
 
