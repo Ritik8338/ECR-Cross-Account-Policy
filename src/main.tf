@@ -1,7 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "dkhundley-terraform-test"
-    key    = "terraform-sagemaker-tutorial.tfstate"
+    bucket = "dkhundley-terraform-testsdkjfhsjd"
     region = "us-east-1"
   }
 }
