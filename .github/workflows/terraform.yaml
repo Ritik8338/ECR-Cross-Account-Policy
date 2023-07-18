@@ -68,7 +68,7 @@ jobs:
         with:
           Python-version: 3.x
       - name: Install Black
-        run: pip Install black
+        run: pip install black
       - name: Run Black
         run: black --diff --check $(git ls-files '*.py')
   test:
@@ -81,7 +81,7 @@ jobs:
         with:
           Python-version: 3.x
       - name: Install pytest
-        run: pip Install pytest
+        run: pip install pytest
       - name: Run pytest
         run: pytest
       - name: Run unittest
