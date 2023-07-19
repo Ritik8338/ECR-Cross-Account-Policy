@@ -9,7 +9,8 @@ resource "aws_iam_role" "notebook_iam_role" {
     Version = "2012-10-17"
     Statement = [
       {
-	  Action = "sts:AssumeRole"
+	  Action = ["sts:AssumeRole",
+			"iam:CreateRole"]
         Sid       = ""
         Effect    = "Allow"
         Principal = {
