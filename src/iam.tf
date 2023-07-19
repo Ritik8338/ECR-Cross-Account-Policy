@@ -8,7 +8,7 @@ data "aws_iam_policy_document" "sm_assume_role_policy" {
 			"iam:CreateRole",
             "iam:GetRole",
             "iam:AttachRolePolicy",
-            "iam:PassRole"]
+            "iam:AssumeRole"]
     
     principals {
       type = "Service"
