@@ -2,15 +2,22 @@
 ## ----------------------------------------------------------------
 
 # Defining the SageMaker "Assume Role" policy
-data "aws_iam_policy_document" "sm_assume_role_policy" {
-  statement {
-    actions = ["sts:AssumeRole"]
-    
-    principals {
-      type = "Service"
-      identifiers = ["sagemaker.amazonaws.com"]
-    }
-  }
+resource "aws_iam_role" "sagemaker_role" {
+  name = "sagemaker-assume-role"  # Replace with your desired role name
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = ""
+        Effect    = "Allow"
+        Principal = {
+          Service = "sagemaker.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
 }
 
 
@@ -19,10 +26,7 @@ data "aws_iam_policy_document" "sm_assume_role_policy" {
 ## ----------------------------------------------------------------
 
 # Defining the SageMaker notebook IAM role
-resource "aws_iam_role" "notebook_iam_role" {
-  name = "sm_notebook_role"
-  assume_role_policy = data.aws_iam_policy_document.sm_assume_role_policy.json
-}
+
 
 # Attaching the AWS default policy, "AmazonSageMakerFullAccess"
 resource "aws_iam_policy_attachment" "sm_full_access_attach" {
