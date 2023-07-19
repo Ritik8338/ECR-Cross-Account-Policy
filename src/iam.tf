@@ -5,7 +5,7 @@
 resource "aws_iam_role" "notebook_iam_role" {
   name = "sagemaker-assume-role"  # Replace with your desired role name
 
-  sm_assume_role_policy = jsonencode({
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
