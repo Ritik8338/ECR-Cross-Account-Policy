@@ -51,11 +51,7 @@ resource "aws_iam_role" "notebook_iam_role" {
       }
     ]
 }
-  EOF
-  tags = {
-    Name        = wwe
-    Environment = STAGE
-  }
+ 
 }
 
 
