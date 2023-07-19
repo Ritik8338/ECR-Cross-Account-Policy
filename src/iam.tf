@@ -10,7 +10,10 @@ resource "aws_iam_role" "notebook_iam_role" {
     Statement = [
       {
 	  Action = ["sts:AssumeRole",
-			"iam:CreateRole"]
+			"iam:CreateRole",
+            "iam:GetRole",
+            "iam:AttachRolePolicy",
+            "iam:PassRole"]
         Sid       = ""
         Effect    = "Allow"
         Principal = {
