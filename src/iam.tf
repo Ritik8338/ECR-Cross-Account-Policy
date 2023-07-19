@@ -2,26 +2,26 @@
 ## ----------------------------------------------------------------
 
 # Defining the SageMaker "Assume Role" policy
-resource "aws_iam_role" "notebook_iam_role" {
-  name = "sagemaker-assume-role"  # Replace with your desired role name
+data "aws_iam_policy_document" "sm_assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    
+    principals {
+      type = "Service"
+      identifiers = ["sagemaker.amazonaws.com"]
+    }
+  }
+}
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-	  Action = ["sts:AssumeRole",
-			"iam:CreateRole",
-            "iam:GetRole",
-            "iam:AttachRolePolicy",
-            "iam:PassRole"]
-        Sid       = ""
-        Effect    = "Allow"
-        Principal = {
-          Service = "sagemaker.amazonaws.com"
-        }
-      }
-    ]
-  })
+
+
+## RESOURCE BLOCKS
+## ----------------------------------------------------------------
+
+# Defining the SageMaker notebook IAM role
+resource "aws_iam_role" "notebook_iam_role" {
+  name = "sm_notebook_role"
+  assume_role_policy = data.aws_iam_policy_document.sm_assume_role_policy.json
 }
 
 
