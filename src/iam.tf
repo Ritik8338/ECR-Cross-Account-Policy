@@ -2,10 +2,10 @@
 ## ----------------------------------------------------------------
 
 # Defining the SageMaker "Assume Role" policy
-resource "aws_iam_role" "sagemaker_role" {
+resource "aws_iam_role" "notebook_iam_role" {
   name = "sagemaker-assume-role"  # Replace with your desired role name
 
-  assume_role_policy = jsonencode({
+  sm_assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
