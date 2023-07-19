@@ -20,10 +20,43 @@ data "aws_iam_policy_document" "sm_assume_role_policy" {
 
 # Defining the SageMaker notebook IAM role
 resource "aws_iam_role" "notebook_iam_role" {
-  name = "sm_notebook_role"
-  assume_role_policy = data.aws_iam_policy_document.sm_assume_role_policy.json
+  assume_role_policy = <<-EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "Stmt1590217939125",
+        "Action": "s3:*",
+        "Effect": "Allow",
+        "Resource": "arn:aws:s3:::wwe"
+      },
+      {
+        "Sid": "Stmt1590217939125",
+        "Action": "s3:*",
+        "Effect": "Allow",
+        "Resource": "arn:aws:s3:::wwe/*"
+      },
+      {
+        "Sid": "Stmt1577967806846",
+        "Action": [
+          "secretsmanager:DescribeSecret",
+          "secretsmanager:GetRandomPassword",
+          "secretsmanager:GetResourcePolicy",
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:ListSecretVersionIds",
+          "secretsmanager:ListSecrets"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ]
 }
-
+  EOF
+  tags = {
+    Name        = wwe
+    Environment = STAGE
+  }
+}
 
 
 ## RESOURCE BLOCKS
