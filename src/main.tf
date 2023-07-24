@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_ecr_repository" "foo" {
-  name                 = "bar"
+  name                 = "docker_demo"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
